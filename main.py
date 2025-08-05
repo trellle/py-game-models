@@ -23,11 +23,12 @@ def main() -> None:
             guild, _ = Guild.objects.get_or_create(
                 name=content[key]["guild"]["name"],
                 description=content[key]["guild"]["description"])
-        Player.objects.create(nickname=key,
-                              email=content[key]["email"],
-                              bio=content[key]["bio"],
-                              race=race,
-                              guild=guild)
+        Player.objects.get_or_create(
+            nickname=key,
+            email=content[key]["email"],
+            bio=content[key].get("bio"),
+            race=race,
+            guild=guild)
 
 
 if __name__ == "__main__":

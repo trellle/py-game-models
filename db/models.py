@@ -11,7 +11,7 @@ class Race(models.Model):
     name = models.CharField(unique=True,
                             max_length=255,
                             choices=RaceNames.choices)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, null=True)
 
 
 class Skill(models.Model):
@@ -27,8 +27,8 @@ class Guild(models.Model):
 
 class Player(models.Model):
     nickname = models.CharField(unique=True, max_length=255)
-    email = models.EmailField(max_length=255)
-    bio = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, unique=True)
+    bio = models.CharField(max_length=255, null=True)
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
     guild = models.ForeignKey(Guild, null=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
